@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="RelacionesEj5">
+  <ClassDiagramComponents>
+    <Class name="Clientes" package="Entidades" visibility="public" xPosition="664.0" yPosition="674.0">
+      <Fields>
+        <Field name="nombre" type="String" visibility="public"/>
+        <Field name="dni" type="int" visibility="public"/>
+        <Field name="untitledField" type="Object" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="Cuotas" package="Entidades" visibility="public" xPosition="1088.0" yPosition="771.0">
+      <Fields>
+        <Field name="poliza" type="Poliza" visibility="public"/>
+        <Field name="nrocuota" type="int" visibility="public"/>
+        <Field name="pago" type="boolean" visibility="public"/>
+        <Field name="vencimiento" type="Date" visibility="public"/>
+        <Field name="formapago" type="String" visibility="public"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="GestionClientes" package="Entidades" visibility="public" xPosition="636.0" yPosition="212.0">
+      <Fields>
+        <Field name="cliente" type="Clientes" visibility="public"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="GestionCuotas" package="Entidades" visibility="public" xPosition="930.0" yPosition="252.0">
+      <Fields>
+        <Field name="cuotas" type="Cuotas" visibility="public"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="GestionPoliza" package="Entidades" visibility="public" xPosition="1184.0" yPosition="212.0">
+      <Fields>
+        <Field name="poliza" type="Poliza" visibility="public"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="GestionVehiculos" package="Entidades" visibility="public" xPosition="1449.0" yPosition="148.0">
+      <Fields>
+        <Field name="vehiculo" type="Vehiculos" visibility="public"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="Poliza" package="Entidades" visibility="public" xPosition="1111.0" yPosition="391.0">
+      <Fields>
+        <Field name="cliente" type="Clientes" visibility="public"/>
+        <Field name="vehiculo" type="Vehiculos" visibility="public"/>
+        <Field name="nropoliza" type="int" visibility="public"/>
+        <Field name="fechainicio" type="Date" visibility="public"/>
+        <Field name="formapago" type="String" visibility="public"/>
+        <Field name="incluyegranizo" type="boolean" visibility="public"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="SistemaSeguros" package="Entidades" visibility="public" xPosition="1042.0" yPosition="-12.0">
+      <Fields>
+        <Field name="gestionClientes" type="GestionClientes" visibility="public"/>
+        <Field name="gestionVehiculos" type="GestionVehiculos" visibility="public"/>
+        <Field name="gestionPoliza" type="GestionPoliza" visibility="public"/>
+        <Field name="gestionCuotas" type="GestionCuotas" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="Vehiculos" package="Entidades" visibility="public" xPosition="1422.0" yPosition="619.0">
+      <Fields>
+        <Field name="marca" type="String" visibility="public"/>
+        <Field name="anio" type="int" visibility="public"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="RelacionesEj5" package="relacionesej5" visibility="public" xPosition="236.0" yPosition="486.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String[]" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <HasRelation name="poliza" source="Entidades.GestionPoliza" target="Entidades.Poliza" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="cliente" source="Entidades.Poliza" target="Entidades.Clientes" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="poliza" source="Entidades.Cuotas" target="Entidades.Poliza" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="gestionVehiculos" source="Entidades.SistemaSeguros" target="Entidades.GestionVehiculos" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="gestionClientes" source="Entidades.SistemaSeguros" target="Entidades.GestionClientes" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="vehiculo" source="Entidades.GestionVehiculos" target="Entidades.Vehiculos" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="gestionPoliza" source="Entidades.SistemaSeguros" target="Entidades.GestionPoliza" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="cuotas" source="Entidades.GestionCuotas" target="Entidades.Cuotas" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="vehiculo" source="Entidades.Poliza" target="Entidades.Vehiculos" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="GestionCuotas" source="Entidades.SistemaSeguros" target="Entidades.GestionCuotas" type="Aggregation" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="cliente" source="Entidades.GestionClientes" target="Entidades.Clientes" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
+</ClassDiagram>
