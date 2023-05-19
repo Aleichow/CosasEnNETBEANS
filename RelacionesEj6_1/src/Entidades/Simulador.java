@@ -50,7 +50,7 @@ public class Simulador {
         Random random = new Random();
 
         for (int i = 0; i < 10; i++) {
-            int dni = random.nextInt((99999999+11111111)+1);
+            int dni = random.nextInt(99999999) + 10000000;
 
             System.out.println(dni);
         }
