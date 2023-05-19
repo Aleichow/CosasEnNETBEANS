@@ -5,6 +5,10 @@
  */
 package votacion;
 
+import Entidades.Alumno;
+import Entidades.Simulador;
+import java.util.List;
+
 /**
  *
  * @author user
@@ -16,6 +20,27 @@ public class VOTACION {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+    Simulador simulador = new Simulador();
+
+        // Generar lista de DNI
+        List<Integer> listaDni = simulador.combinacionDni();
+
+        // Crear lista de alumnos
+        List<Alumno> listaAlumnos = simulador.crearAlumnos(listaDni);
+
+        // Imprimir lista de alumnos
+        simulador.imprimirAlumnos(listaAlumnos);
+
+        // Realizar votaciones
+        simulador.votacion(listaAlumnos);
+
+        // Mostrar resultados de votaciones
+        simulador.mostrarResultados(listaAlumnos);
+
+        // Realizar recuento de votos
+        Simulador.recuentoVotos(listaAlumnos);
+
+        
     }
     
 }

@@ -50,9 +50,10 @@ public class Simulador {
         Random random = new Random();
 
         for (int i = 0; i < 10; i++) {
-            int dni = random.nextInt((99999999+11111111)+1);
+            int dni = random.nextInt(99999999 - 11111111 + 1) + 11111111;
 
-            System.out.println(dni);
+            ListaDNI.add(dni);
+
         }
 
         System.out.println(ListaDNI);
@@ -113,14 +114,17 @@ public class Simulador {
                     alumnoVotado = listaAlumnos.get((int) (Math.random() * listaAlumnos.size()));
                 }
 
-                // Guardar el voto realizado por el alumno votante
-                alumnoVotante.votar((Set<Alumno>) alumnoVotado);
+               
+               
 
                 // Registrar el voto recibido por el alumno votado
                 alumnoVotado.guardarVotoRecibido(alumnoVotante);
 
                 // Agregar el alumno votado al conjunto de votos realizados para evitar duplicados
                 votosRealizados.add(alumnoVotado);
+                 
+                alumnoVotante.votar(votosRealizados);
+                
             }
         });
 
@@ -171,25 +175,8 @@ public class Simulador {
         });
     }
 
-    public static void crearFacilitadores(List<Alumno> listaAlumnos) {
-        // Ordenar la lista de alumnos por cantidad de votos recibidos en orden descendente
-        Collections.sort(listaAlumnos, Comparator.comparingInt(Alumno::getVotosRecibidos).reversed());
+    public void crearFacilitadores() {
 
-        // Crear los 5 facilitadores con los 5 primeros alumnos votados
-        System.out.println("Facilitadores:");
-        for (int i = 0; i < 5; i++) {
-            Alumno alumno = listaAlumnos.get(i);
-
-            System.out.println(alumno);
-        }
-
-        // Crear los 5 facilitadores suplentes con los 5 segundos alumnos más votados
-        System.out.println("Facilitadores Suplentes:");
-        for (int i = 5; i < 10; i++) {
-             Alumno alumno = listaAlumnos.get(i);
-
-            System.out.println(alumno);
-        }
     }
 
 }
