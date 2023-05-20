@@ -52,10 +52,6 @@ public class Alumno {
         return cantVotos;
     }
 
-    public void aumentarVoto() {
-        this.cantVotos++;
-    }
-
     public Alumno(String nombre, String apellido, int dni) {
         this.nombre = nombre;
         this.apellido = apellido;
@@ -69,15 +65,11 @@ public class Alumno {
         Set<Alumno> otroAlumnos = new HashSet<>(alumnos);
         otroAlumnos.remove(this);
 
-        while (alumnosaVotar.size() < 3) {
+        for (int i = 0; i < 3; i++) {
             Alumno alumAleatorio = obtenerAlumnoAleatorio(otroAlumnos);
             alumnosaVotar.add(alumAleatorio);
-
+            this.cantVotos++;
         }
-
-        alumnosaVotar.forEach((alumno) -> {
-            alumno.aumentarVoto();
-        });
 
     }
 
@@ -99,6 +91,7 @@ public class Alumno {
 
     void guardarVotoRecibido(Alumno alumnoVotante) {
         votosRecibidos.add(alumnoVotante);
+
     }
 
     public void mostarVotoRecibido() {
@@ -109,4 +102,22 @@ public class Alumno {
 
     }
 
+    @Override
+    public String toString() {
+        return "Alumno{" + "nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni + ", cantVotos=" + cantVotos + '}';
+    }
+
+    
+   
+
+
+
+
+}
+ class ComparadorAlumnoPorVotosRecibidos implements Comparator<Alumno> {
+    @Override
+    public int compare(Alumno alumno1, Alumno alumno2) {
+       return Integer.compare(alumno2.getVotosRecibidos().size(), alumno1.getVotosRecibidos().size());
+        
+    }
 }

@@ -20,7 +20,7 @@ public class VOTACION {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-    Simulador simulador = new Simulador();
+        Simulador simulador = new Simulador();
 
         // Generar lista de DNI
         List<Integer> listaDni = simulador.combinacionDni();
@@ -33,13 +33,14 @@ public class VOTACION {
 
         // Realizar votaciones
         simulador.votacion(listaAlumnos);
-
+        
+        simulador.mostrarConVotos(listaAlumnos);
         // Mostrar resultados de votaciones
-        simulador.mostrarResultados(listaAlumnos);
 
         // Realizar recuento de votos
         Simulador.recuentoVotos(listaAlumnos);
-
+        
+        simulador.crearFacilitadores(listaAlumnos);
         
     }
     

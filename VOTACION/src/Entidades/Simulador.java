@@ -5,6 +5,7 @@
  */
 package Entidades;
 
+import Entidades.ComparadorAlumnoPorVotosRecibidos;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -56,7 +57,6 @@ public class Simulador {
 
         }
 
-        System.out.println(ListaDNI);
         return ListaDNI;
     }
 
@@ -114,68 +114,65 @@ public class Simulador {
                     alumnoVotado = listaAlumnos.get((int) (Math.random() * listaAlumnos.size()));
                 }
 
-               
-               
-
                 // Registrar el voto recibido por el alumno votado
                 alumnoVotado.guardarVotoRecibido(alumnoVotante);
 
                 // Agregar el alumno votado al conjunto de votos realizados para evitar duplicados
                 votosRealizados.add(alumnoVotado);
-                 
+
                 alumnoVotante.votar(votosRealizados);
-                
+
             }
         });
 
         System.out.println("Ya voto!");
     }
 
-    public void mostrarResultados(List<Alumno> alumnos) {
-        alumnos.stream().map((alumno1) -> {
+    public void mostrarConVotos(List<Alumno> listaAlumno) {
+
+        for (Alumno alumno1 : listaAlumno) {
             System.out.println("Alumno: " + alumno1.getNombre() + " " + alumno1.getApellido());
-            return alumno1;
-        }).map((alumno1) -> {
             System.out.println("Cantidad de votos: " + alumno1.getCantVotos());
-            return alumno1;
-        }).map((alumno1) -> {
             System.out.println("Votos Recibidos: ");
-            return alumno1;
-        }).map((alumno1) -> {
             alumno1.mostarVotoRecibido();
-            return alumno1;
-        }).forEachOrdered((_item) -> {
-            System.out.println("-----------------------");
-        });
+        }
+
     }
 
-    public static void recuentoVotos(List<Alumno> listaAlumnos) {
-        Map<Alumno, Integer> contadorVotos = new HashMap<>();
+    public static void recuentoVotos(List<Alumno> listaAlumno) {
+        int max = 0;
+        Alumno masVotado = new Alumno();
+        for (Alumno alumno1 : listaAlumno) {
+            System.out.println("Alumno: " + alumno1.getNombre() + " " + alumno1.getApellido());
+            System.out.println("Recibio: " + alumno1.getVotosRecibidos().size());
 
-        // Inicializar contador de votos para cada alumno
-        listaAlumnos.forEach((alumno) -> {
-            contadorVotos.put(alumno, 0);
-        });
+            if (max < alumno1.getVotosRecibidos().size()) {
+                max = alumno1.getVotosRecibidos().size();
+                masVotado = alumno1;
+            }
 
-        // Contar votos recibidos por cada alumno
-        listaAlumnos.stream().map((alumno) -> (List<Alumno>) alumno.getVotosRecibidos()).forEachOrdered((votosRecibidos) -> {
-            votosRecibidos.forEach((votante) -> {
-                contadorVotos.put(votante, contadorVotos.get(votante) + 1);
-            });
-        });
-
-        // Mostrar los resultados del recuento de votos
-        listaAlumnos.stream().map((alumno) -> {
-            int cantidadVotos = contadorVotos.get(alumno);
-            System.out.println("Alumno: " + alumno.getNombre() + " " + alumno.getApellido());
-            System.out.println("Cantidad de votos recibidos: " + cantidadVotos);
-            return alumno;
-        }).forEachOrdered((_item) -> {
-            System.out.println();
-        });
+        }
+        System.out.println("El ganador de las elecciones es: " + masVotado + " con: " + max + " votos.");
     }
 
-    public void crearFacilitadores() {
+    public void crearFacilitadores(List<Alumno> listaAlumno) {
+
+        Collections.sort(listaAlumno, new ComparadorAlumnoPorVotosRecibidos());
+
+        for (Alumno alumno1 : listaAlumno) {
+            System.out.println(alumno1.getNombre() + " " + alumno1.getApellido() + " " + alumno1.getVotosRecibidos().size());
+        }
+
+        for (int i = 0; i < listaAlumno.size(); i++) {
+
+            if (i < 5) {
+                System.out.println(listaAlumno.get(i) + " Es un primer facilitador");
+            } else {
+
+                System.out.println(listaAlumno.get(i) + " Es un facilitador suplente");
+            }
+
+        }
 
     }
 
