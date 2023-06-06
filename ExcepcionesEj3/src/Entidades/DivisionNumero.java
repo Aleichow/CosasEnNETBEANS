@@ -9,11 +9,6 @@ package Entidades;
  *
  * @author user
  */
-public interface CalculosFormas {
-
-    double PI = Math.PI; // Valor de PI como constante
-
-    double calcularArea();
-
-    double calcularPerimetro();
+public class DivisionNumero {
+    
 }

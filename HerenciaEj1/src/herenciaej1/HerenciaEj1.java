@@ -25,12 +25,11 @@ public class HerenciaEj1 {
         Animales p1 = new Perro("Comida Balanceada", "Pepe", "Labrador", 14);
         Animales g1 = new Gato("Pescado", "Tomba", "Siames", 5);
         Animales c1 = new Caballo("Pasto", "Paloma", "Fino", 5);
-        
+
         p1.alimentarse();
         g1.alimentarse();
         c1.alimentarse();
-        
-        
+
     }
 
 }

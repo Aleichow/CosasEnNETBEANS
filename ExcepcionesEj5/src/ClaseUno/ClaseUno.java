@@ -3,17 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Entidades;
+package ClaseUno;
 
 /**
  *
  * @author user
  */
-public interface CalculosFormas {
-
-    double PI = Math.PI; // Valor de PI como constante
-
-    double calcularArea();
-
-    double calcularPerimetro();
+public class ClaseUno {
+   
+   
 }
