@@ -82,12 +82,16 @@ public class ServiciosEj3 {
         int debajoPeso = 0;
 
         for (int i = 0; i < resultadosIMC.length; i++) {
-            if (resultadosIMC[i] == 0) {
-                pesoIdeal++;
-            } else if (resultadosIMC[i] == 1) {
-                sobrepeso++;
-            } else {
-                debajoPeso++;
+            switch (resultadosIMC[i]) {
+                case 0:
+                    pesoIdeal++;
+                    break;
+                case 1:
+                    sobrepeso++;
+                    break;
+                default:
+                    debajoPeso++;
+                    break;
             }
         }
 

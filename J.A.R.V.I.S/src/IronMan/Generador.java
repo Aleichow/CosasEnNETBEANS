@@ -12,9 +12,10 @@ package IronMan;
 public class Generador {
 
     private float energia;
-
+    
     public Generador() {
         this.energia = Float.MAX_VALUE;
+     
     }
 
     public void consumirEnergia(int cantidad) {
@@ -22,7 +23,7 @@ public class Generador {
         if (energia < 0) {
             energia = 0;
         }
-        
+
     }
 
     // Getters y Setters
@@ -35,12 +36,11 @@ public class Generador {
     }
 
     public float mostrarEstadoBateria() {
-     
-        
-       float porcentaje = (energia / Float.MAX_VALUE) * 100.0f;
-System.out.println("Estado de la batería: " + porcentaje + "%");
 
-return  porcentaje;
+        float porcentaje = (energia / Float.MAX_VALUE) * 100.0f;
+        System.out.println("Estado de la batería: " + porcentaje + "%");
+
+        return porcentaje;
     }
 
 }

@@ -5,6 +5,8 @@
  */
 package IronMan;
 
+import java.util.Random;
+
 /**
  *
  * @author user
@@ -15,12 +17,20 @@ public class Repulsor {
     public static final int INTENSIDAD_NORMAL = 2;
 
     private int consumo;
+    public boolean daniado;
 
     public Repulsor() {
         this.consumo = 3;
+        this.daniado = false;
     }
 
     public int usar(int intensidad, int tiempo) {
+        Random random = new Random();
+        if (random.nextDouble() <= 0.3) {
+            daniado = true;
+            System.out.println("¡El repulsor ha sufrido daños!");
+            return 0;
+        }
         return consumo * intensidad * tiempo;
     }
 
@@ -31,5 +41,29 @@ public class Repulsor {
 
     public void setConsumo(int consumo) {
         this.consumo = consumo;
+    }
+
+    public void reparar() {
+        Random random = new Random();
+        if (random.nextDouble() <= 0.4) {
+            daniado = false;
+            System.out.println("¡El repulsor ha sido reparado y está en buen estado!");
+        } else {
+            System.out.println("El repulsor no pudo ser reparado y sigue dañado.");
+        }
+    }
+
+    public boolean estaDestruido() {
+        // Agrega aquí la lógica para determinar si el propulsor está destruido
+        // Puedes utilizar la clase Random para modelar la probabilidad de destrucción
+        // y retornar true si el propulsor se destruye, y false en caso contrario.
+        // Por ejemplo:
+        Random random = new Random();
+        double probabilidadDestruccion = 0.3; // 30% de probabilidad de destrucción
+        return random.nextDouble() <= probabilidadDestruccion;
+    }
+
+    public boolean estaReparado() {
+        return !daniado && !estaDestruido();
     }
 }
