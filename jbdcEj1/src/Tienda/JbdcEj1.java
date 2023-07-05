@@ -6,6 +6,7 @@
 package Tienda;
 
 import Tienda.entidades.Producto;
+import Tienda.persistencia.DAO;
 import Tienda.persistencia.ProductoDAO;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -21,23 +22,27 @@ import java.util.List;
  */
 public class JbdcEj1 {
 
-    private static final String URL = "jdbc:mysql://localhost:3306/tienda";
-    private static final String USERNAME = "root";
-    private static final String PASSWORD = "root";
+ //   private static final String URL = "jdbc:mysql://localhost:3306/tienda";
+   // private static final String USERNAME = "root";
+    //private static final String PASSWORD = "root";
 
     /**
      * @param args the command line arguments
+     * @throws java.sql.SQLException
      */
     public static void main(String[] args) throws SQLException {
         // TODO code application logic here
         Scanner sc = new Scanner(System.in);
         // Establecer conexión con la base de datos
-        Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+       // Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 
-        ProductoDAO productoDAO = new ProductoDAO(connection);
-
-        ProductoService productoService = new ProductoService(connection);
-        FabricanteService fabricanteService = new FabricanteService(connection);
+        DAO dao = new DAO();
+        
+        
+        ProductoDAO productoDAO = new ProductoDAO(dao.getConnection()); 
+        
+        ProductoService productoService = new ProductoService(dao.getConnection());
+        FabricanteService fabricanteService = new FabricanteService(dao.getConnection());
         // Crear un objeto Scanner para leer la entrada del usuario
         Scanner scanner = new Scanner(System.in);
 
@@ -110,10 +115,7 @@ public class JbdcEj1 {
         } while (opcion != 0);
 
         // Cerrar la conexión a la base de datos
-        try {
-            connection.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        dao.closeConnection();
+ 
     }
 }
